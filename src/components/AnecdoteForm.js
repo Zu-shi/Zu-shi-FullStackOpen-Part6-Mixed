@@ -15,8 +15,10 @@ const AnecdoteForm = () => {
   const submit = useMutation(
     (data) => axios.post(url, { content: data, id: getId(), votes: 0 }).then((res) => { return res.data }),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries('anecdotes')
+      onSuccess: (newAnecdote) => {
+        //queryClient.invalidateQueries('anecdotes')
+        const ans = queryClient.getQueryData('anecdotes')
+        queryClient.setQueryData('anecdotes', ans.concat(newAnecdote))
       },
     }
   )
