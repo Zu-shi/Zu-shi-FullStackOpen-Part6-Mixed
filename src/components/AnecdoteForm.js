@@ -1,11 +1,15 @@
 
 import { useQuery } from 'react-query'
 import axios from 'axios'
+import { useContext } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
+import { NotificationContext } from './NotificationContext'
 
 const url = 'http://localhost:3001/anecdotes'
 
 const AnecdoteForm = () => {
+  const [notif, dispatch] = useContext(NotificationContext)
+
   const queryClient = useQueryClient()
 
   function getId() {
@@ -20,6 +24,10 @@ const AnecdoteForm = () => {
         const ans = queryClient.getQueryData('anecdotes')
         queryClient.setQueryData('anecdotes', ans.concat(newAnecdote))
       },
+      onError: (error) => {
+        dispatch({ type: 'SET', payload: error.response.data.error })
+        setTimeout(() => { dispatch({ type: 'RESET' }) }, 5000);
+      }
     }
   )
 

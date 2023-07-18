@@ -2,7 +2,7 @@ import { createContext, useReducer, useContext, useEffect } from 'react'
 
 export const NotificationContext = createContext()
 
-export const setNotifications = (state, action) => {
+const setNotifications = (state, action) => {
   console.log(action)
   switch (action.type) {
     case 'SET':

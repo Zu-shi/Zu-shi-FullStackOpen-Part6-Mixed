@@ -3,7 +3,7 @@ import Notification from './components/Notification'
 import { useQuery } from 'react-query'
 import { useMutation, useQueryClient } from 'react-query'
 import axios from 'axios'
-import { NotificationContext, setNotifications, NotificationProvider } from './components/NotificationContext'
+import { NotificationContext, NotificationProvider } from './components/NotificationContext'
 import { useContext } from 'react'
 
 const url = 'http://localhost:3001/anecdotes'
